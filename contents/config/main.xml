@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+
+    <kcfgfile name="" />
+
+    <group name="General">
+        <entry name="Color" type="Color">
+            <label>Default background color</label>
+            <default>#000000</default>
+        </entry>
+        <entry name="FillMode" type="int">
+            <label>Sizing, cropping and positioning of the wallpaper image</label>
+            <default>0</default>
+        </entry>
+        <entry name="ChangeInterval" type="int">
+            <label>Interval (in minutes) between wallpaper changes</label>
+            <default>10</default>
+        </entry>
+    </group>
+
+    <group name="Sources">
+        <entry name="SourceBing" type="bool">
+            <label>Bing</label>
+            <default>true</default>
+        </entry>
+        <entry name="SourceNasa" type="bool">
+            <label>NASA Astronomy Picture of the Day</label>
+            <default>true</default>
+        </entry>
+        <entry name="SourceUnsplash" type="bool">
+            <label>Random featured image from Unsplash.com</label>
+            <default>true</default>
+        </entry>
+    </group>
+
+</kcfg>
