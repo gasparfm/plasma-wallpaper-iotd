@@ -17,14 +17,14 @@
  *  Boston, MA 02110-1301, USA.
  */
 
-import QtQuick 2.5
+import QtQuick 2.6
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-ColumnLayout {
+Column {
     id: root;
     objectName: "root";
 
@@ -39,9 +39,20 @@ ColumnLayout {
     spacing: units.largeSpacing / 2;
 
     Row {
+        spacing: units.largeSpacing / 2;
+        topPadding: units.largeSpacing / 2;
+
+        Label {
+            text: i18n("General")
+
+            font.pointSize: theme.defaultFont.pointSize * 1.25;
+            font.bold: true;
+        }
+    }
+
+    Row {
         id: sizePositionRow;
         spacing: units.largeSpacing / 2;
-        Layout.alignment: Qt.AlignTop | Qt.AlignLeft;
 
         Label {
             id: sizePositionLabel;
@@ -86,7 +97,6 @@ ColumnLayout {
     Row {
         id: bgColorRow;
         spacing: units.largeSpacing / 2;
-        Layout.alignment: Qt.AlignTop | Qt.AlignLeft;
 
         Label {
             id: bgColorLabel;
@@ -116,7 +126,6 @@ ColumnLayout {
     Row {
         id: intervalRow;
         spacing: units.largeSpacing / 2;
-        Layout.alignment: Qt.AlignTop | Qt.AlignLeft;
 
         Label {
             id: intervalLabel;
@@ -177,14 +186,38 @@ ColumnLayout {
         }
     }
 
-    Label {
-        text: i18n("Sources")
-        Layout.alignment: Qt.AlignTop | Qt.AlignLeft;
+    Row {
+        spacing: units.largeSpacing / 2;
+        topPadding: units.largeSpacing / 2;
+        bottomPadding: units.largeSpacing / 2;
+
+        Label {
+            text: i18n("Sources")
+
+            font.pointSize: theme.defaultFont.pointSize * 1.25;
+            font.bold: true;
+        }
     }
 
-    CheckBox { Layout.alignment: Qt.AlignTop | Qt.AlignLeft; id: srcBing; text: i18n("Bing"); }
-    CheckBox { Layout.alignment: Qt.AlignTop | Qt.AlignLeft; id: srcNasa; text: i18n("NASA Astronomy Picture of the Day"); }
-    CheckBox { Layout.alignment: Qt.AlignTop | Qt.AlignLeft; id: srcUnsplash; text: i18n("Featured Images from Unsplash.com"); }
+    Column {
+        spacing: units.largeSpacing / 2;
+        leftPadding: units.gridUnit;
+
+        CheckBox {
+            id: srcBing;
+            text: i18n("Bing");
+        }
+
+        CheckBox {
+            id: srcNasa;
+            text: i18n("NASA Astronomy Picture of the Day");
+        }
+
+        CheckBox {
+            id: srcUnsplash;
+            text: i18n("Featured Images from Unsplash.com");
+        }
+    }
 
     ColorDialog {
         id: bgColorDialog;
