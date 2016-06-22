@@ -16,8 +16,8 @@
             <default>0</default>
         </entry>
         <entry name="ChangeInterval" type="int">
-            <label>Interval (in minutes) between wallpaper changes</label>
-            <default>10</default>
+            <label>Interval (in milliseconds) between wallpaper changes</label>
+            <default>3600000</default>
         </entry>
     </group>
 

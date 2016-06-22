@@ -45,7 +45,7 @@ function nasaApod(callback) {
             var data = JSON.parse(xhr.responseText);
             var text = data.title;
             if (typeof(data.copyright) == "string") {
-                text = text + "\n" + data.copyright;
+                text = text + ", by " + data.copyright;
             }
             callback(data.hdurl, text, "../assets/nasa.svg");
         }

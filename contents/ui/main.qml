@@ -19,6 +19,8 @@
 
 
 import QtQuick 2.5
+import org.kde.plasma.core 2.0 as PlasmaCore
+
 import "./sources.js" as Sources
 
 Rectangle {
@@ -26,34 +28,32 @@ Rectangle {
     objectName: "iotdRoot";
 
     anchors.fill: parent;
-    color: "black";
+    color: wallpaper.configuration.Color;
 
     readonly property var allSources: [
         "SourceBing",
         "SourceNasa",
         "SourceUnsplash"
     ];
-
     property var enabledSources: [];
 
     function evalEnabledSources() {
         enabledSources.length = 0;
         for (var i in allSources) {
-            enabledSources.push(allSources[i]);
+            if (wallpaper.configuration[allSources[i]] == true) {
+                enabledSources.push(allSources[i]);
+            }
         }
     }
 
-    function resetTimer() {
-        iotdSlideshowTimer.stop();
-        iotdSlideshowTimer.interval = 1800000;
-        iotdSlideshowTimer.start();
-    }
-
     function changeImage() {
+        evalEnabledSources();
         var index = Math.floor(Math.random() * enabledSources.length);
         var source = enabledSources[index];
         var imgfunc = Sources.ImageSources[source];
+
         imgfunc(setImageCallback);
+        iotdSlideshowTimer.start();
     }
 
     function setImageCallback(imageUrl, imageTitleCopyright, sourceLogo) {
@@ -62,16 +62,12 @@ Rectangle {
         iotdCopyrightLabel.text = imageTitleCopyright;
     }
 
-    Component.onCompleted: {
-        evalEnabledSources();
-    }
-
     Image {
         id: iotdImage;
         objectName: "iotdImage";
         anchors.fill: parent;
 
-        fillMode: Image.PreserveAspectCrop;
+        fillMode: wallpaper.configuration.FillMode;
         cache: true;
         asynchronous: true;
         mipmap: true;
@@ -118,7 +114,8 @@ Rectangle {
         objectName: "iotdSlideshowTimer";
 
         running: false;
-        repeat: true;
+        interval: wallpaper.configuration.ChangeInterval;
+        repeat: false;
 
         onTriggered: {
             evalEnabledSources();
