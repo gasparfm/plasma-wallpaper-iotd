@@ -17,7 +17,6 @@
  *  Boston, MA 02110-1301, USA.
  */
 
-
 import QtQuick 2.5
 import org.kde.plasma.core 2.0 as PlasmaCore
 
