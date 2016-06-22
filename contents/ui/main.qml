@@ -47,18 +47,34 @@ Rectangle {
 
     function changeImage() {
         evalEnabledSources();
+        if (enabledSources.length == 0) {
+            setFallbackCallback();
+            return;
+        }
+
         var index = Math.floor(Math.random() * enabledSources.length);
         var source = enabledSources[index];
         var imgfunc = Sources.ImageSources[source];
 
-        imgfunc(setImageCallback);
-        iotdSlideshowTimer.start();
+        imgfunc(setImageCallback, setFallbackCallback);
     }
 
     function setImageCallback(imageUrl, imageTitleCopyright, sourceLogo) {
         iotdImage.source = imageUrl;
         iotdSourceLogo.source = sourceLogo;
         iotdCopyrightLabel.text = imageTitleCopyright;
+
+        iotdSlideshowTimer.interval = wallpaper.configuration.ChangeInterval;
+        iotdSlideshowTimer.start();
+    }
+
+    function setFallbackCallback() {
+        iotdImage.source = wallpaper.configuration.FallbackImage;
+        iotdSourceLogo.source = "";
+        iotdCopyrightLabel.text = "";
+
+        iotdSlideshowTimer.interval = 60000;
+        iotdSlideshowTimer.start();
     }
 
     Image {
@@ -66,6 +82,7 @@ Rectangle {
         objectName: "iotdImage";
         anchors.fill: parent;
 
+        source: wallpaper.configuration.FallbackImage;
         fillMode: wallpaper.configuration.FillMode;
         cache: true;
         asynchronous: true;

@@ -19,6 +19,10 @@
             <label>Interval (in milliseconds) between wallpaper changes</label>
             <default>3600000</default>
         </entry>
+        <entry name="FallbackImage" type="String">
+            <label>Path of wallpaper image to display when offline, or the download of wallpaper failed</label>
+            <default>../assets/default.svg</default>
+        </entry>
     </group>
 
     <group name="Sources">

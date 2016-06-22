@@ -1,19 +1,8 @@
 This is a plugin for Plasma 5 which displays an "Image of the Day" from
-Internet sources.
+Internet sources as the wallpaper.
 
-Alpha quality. Sources include: Bing, NASA APOD and Unsplash
-Images are hardcoded to change every 30 minutes. Behaviour undefined without
-internet connection.
+Currently, sources include:
 
-Eventually, this will ship with kdeplasma-addons.
-
-To install, check out the repo and install with plasmapkg2:
-
-    git clone git@github.com:BaloneyGeek/plasma-wallpaper-iotd.git iotd
-    plasmapkg2 -t wallpaperplugin -i iotd
-
-    Set the wallpaper type to "Image of the Day". Ignore errors.
-
-To remove, run the following:
-
-    plasmapkg2 -t wallpaperplugin -r org.kde.iotd
+* Bing
+* NASA Astronomy Picture of the Day
+* Unsplash.com

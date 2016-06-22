@@ -30,6 +30,7 @@ Column {
 
     property var cfg_FillMode;
     property int cfg_ChangeInterval;
+    property string cfg_FallbackImage;
 
     property alias cfg_Color: bgColorDialog.color;
     property alias cfg_SourceBing: srcBing.checked;
@@ -182,6 +183,45 @@ Column {
                 var hours = intervalHours.value * 3600000;
                 var minutes = intervalMinutes.value * 60000;
                 cfg_ChangeInterval = hours + minutes;
+            }
+        }
+    }
+
+    Row {
+        id: fallbackImageRow;
+        spacing: units.largeSpacing / 2;
+
+        Label {
+            id: fallbackImageLabel;
+            text: i18n("Fallback Image:");
+
+            width: formAlignment - units.largeSpacing;
+            anchors.verticalCenter: fallbackImageButton.verticalCenter;
+            horizontalAlignment: Text.AlignRight;
+        }
+
+        Button {
+            id: fallbackImageButton;
+            width: theme.mSize(theme.defaultFont).width * 24;
+            text: {
+                var url = cfg_FallbackImage
+                return url.substring(url.lastIndexOf("/") + 1);
+            }
+            onClicked: { fallbackImageDialog.open(); }
+
+            FileDialog {
+                id: fallbackImageDialog;
+
+                title: i18n("Please choose an image")
+                modality: Qt.WindowModal;
+                folder: shortcuts.pictures;
+
+                nameFilters: [ "Image files (*.jpg *.jpe *.jpeg *.png *.bmp *.svg *.svgz)" ];
+                selectExisting: true;
+                selectFolder: false;
+                selectMultiple: false;
+
+                onAccepted: { cfg_FallbackImage = fileUrl; }
             }
         }
     }
